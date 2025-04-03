@@ -19,12 +19,12 @@ public class UserController {
         return Result.success(userService.getOrCreateUser(username, computerName));
     }
 
-    @GetMapping("/computer-name")
+    @GetMapping("/getComputerName")
     public Result<String> getComputerName() {
         return Result.success(userService.getComputerName());
     }
 
-    @PostMapping("/update-username")
+    @PostMapping("/updateUsername")
     public Result<String> updateUsername(@RequestParam Long userId, @RequestParam String newUsername) {
         boolean success = userService.updateUsername(userId, newUsername);
         return success ? Result.success("修改成功") : Result.error(400, "用户不存在或修改失败");

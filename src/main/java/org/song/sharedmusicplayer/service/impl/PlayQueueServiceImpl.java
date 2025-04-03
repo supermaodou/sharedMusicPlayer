@@ -1,5 +1,6 @@
 package org.song.sharedmusicplayer.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.song.sharedmusicplayer.entity.PlayQueue;
 import org.springframework.stereotype.Service;
