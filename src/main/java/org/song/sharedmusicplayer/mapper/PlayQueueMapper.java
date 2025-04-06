@@ -11,4 +11,6 @@ import java.util.List;
 public interface PlayQueueMapper extends BaseMapper<PlayQueue> {
 
     List<MusicQueueVO> findCurrentQueue();
+
+    PlayQueue findFirstByOrderByIdAsc();
 }

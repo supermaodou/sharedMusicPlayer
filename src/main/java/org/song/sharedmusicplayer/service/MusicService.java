@@ -7,7 +7,7 @@ import org.song.sharedmusicplayer.entity.Music;
 import java.util.List;
 
 public interface MusicService extends IService<Music> {
-    List<Music> getAllMusic();
+    List<Music> getMusicList();
     Boolean addMusic(Music music);
 
     Boolean deleteMusic(Long id);

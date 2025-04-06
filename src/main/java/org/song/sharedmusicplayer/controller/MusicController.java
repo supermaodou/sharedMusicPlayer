@@ -17,7 +17,7 @@ public class MusicController {
 
     @GetMapping("/list")
     public Result<List<Music>> getAllMusic() {
-        return Result.success(musicService.getAllMusic());
+        return Result.success(musicService.getMusicList());
     }
 
     @PostMapping("/add")

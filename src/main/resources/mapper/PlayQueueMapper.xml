@@ -20,4 +20,10 @@
         WHERE q.status IN ('waiting', 'playing')
         ORDER BY q.add_time ASC
     </select>
+    <select id="findFirstByOrderByIdAsc" resultType="org.song.sharedmusicplayer.entity.PlayQueue">
+        SELECT id, music_id, user_id, status, add_time
+        FROM tb_play_queue
+        ORDER BY id ASC
+        LIMIT 1
+    </select>
 </mapper>
