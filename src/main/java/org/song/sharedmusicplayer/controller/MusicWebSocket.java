@@ -11,24 +11,24 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@RestController
-@RequestMapping("/ws")
+//@RestController
+//@RequestMapping("/ws")
 public class MusicWebSocket {
-    private final Set<WebSocketSession> sessions = ConcurrentHashMap.newKeySet();
-
-    @OnOpen
-    public void onOpen(WebSocketSession session) {
-        sessions.add(session);
-    }
-
-    @OnClose
-    public void onClose(WebSocketSession session) {
-        sessions.remove(session);
-    }
-
-    public void sendUpdate(String message) throws IOException {
-        for (WebSocketSession session : sessions) {
-            session.sendMessage(new TextMessage(message));
-        }
-    }
+//    private final Set<WebSocketSession> sessions = ConcurrentHashMap.newKeySet();
+//
+//    @OnOpen
+//    public void onOpen(WebSocketSession session) {
+//        sessions.add(session);
+//    }
+//
+//    @OnClose
+//    public void onClose(WebSocketSession session) {
+//        sessions.remove(session);
+//    }
+//
+//    public void sendUpdate(String message) throws IOException {
+//        for (WebSocketSession session : sessions) {
+//            session.sendMessage(new TextMessage(message));
+//        }
+//    }
 }

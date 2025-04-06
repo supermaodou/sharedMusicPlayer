@@ -21,7 +21,12 @@ public class MusicController {
     }
 
     @PostMapping("/add")
-    public void addMusic(@RequestBody Music music) {
-        musicService.addMusic(music);
+    public Result<Boolean> addMusic(@RequestBody Music music) {
+        return Result.success(musicService.addMusic(music));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Result<Boolean> deleteMusic(@PathVariable("id") Long id) {
+        return Result.success(musicService.deleteMusic(id));
     }
 }

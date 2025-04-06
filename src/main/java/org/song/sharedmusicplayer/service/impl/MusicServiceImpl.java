@@ -17,7 +17,12 @@ public class MusicServiceImpl extends ServiceImpl<MusicMapper, Music> implements
     }
 
     @Override
-    public void addMusic(Music music) {
-        save(music);
+    public Boolean addMusic(Music music) {
+        return save(music);
+    }
+
+    @Override
+    public Boolean deleteMusic(Long id) {
+        return removeById(id);
     }
 }

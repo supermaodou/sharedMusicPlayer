@@ -1,32 +1,37 @@
 package org.song.sharedmusicplayer.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.song.sharedmusicplayer.entity.PlayQueue;
+import org.song.sharedmusicplayer.vo.MusicQueueVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.song.sharedmusicplayer.service.PlayQueueService;
 import org.song.sharedmusicplayer.mapper.PlayQueueMapper;
+
 import java.util.List;
 
 @Service
 public class PlayQueueServiceImpl extends ServiceImpl<PlayQueueMapper, PlayQueue> implements PlayQueueService {
 
+    @Autowired
+    private PlayQueueMapper playQueueMapper;
+
     @Override
-    public List<PlayQueue> getQueue() {
-        return list();
+    public List<MusicQueueVO> getQueue() {
+        return playQueueMapper.findCurrentQueue();
     }
 
     @Override
-    public void addToQueue(Long musicId, Long userId) {
+    public Boolean addToQueue(Long musicId, Long userId) {
         PlayQueue queue = new PlayQueue();
         queue.setMusicId(musicId);
         queue.setUserId(userId);
         queue.setStatus("waiting");
-        save(queue);
+        return save(queue);
     }
 
     @Override
-    public void removeFromQueue(Long queueId) {
-        removeById(queueId);
+    public Boolean removeFromQueue(Long queueId) {
+        return removeById(queueId);
     }
 }

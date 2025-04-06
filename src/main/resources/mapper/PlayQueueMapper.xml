@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.song.sharedmusicplayer.mapper.PlayQueueMapper">
+
+    <resultMap id="MusicQueueVOResultMap" type="org.song.sharedmusicplayer.vo.MusicQueueVO">
+        <result property="queueId" column="id"/>
+        <result property="musicId" column="id"/>
+        <result property="title" column="title"/>
+        <result property="artist" column="artist"/>
+        <result property="addedBy" column="added_by"/>
+        <result property="addedByUsername" column="username"/>
+    </resultMap>
+
+    <!-- 查询当前播放队列中的歌曲 -->
+    <select id="findCurrentQueue" resultMap="MusicQueueVOResultMap">
+        SELECT q.id, m.id, m.title, m.artist, m.added_by, u.username
+        FROM tb_play_queue q
+                 INNER JOIN tb_music m ON m.id = q.music_id
+                 INNER JOIN tb_users u ON u.id = m.added_by
+        WHERE q.status IN ('waiting', 'playing')
+        ORDER BY q.add_time ASC
+    </select>
+</mapper>

@@ -1,9 +1,9 @@
 package org.song.sharedmusicplayer.controller;
 
 import jakarta.annotation.Resource;
-import org.song.sharedmusicplayer.entity.PlayQueue;
 import org.song.sharedmusicplayer.service.PlayQueueService;
 import org.song.sharedmusicplayer.uitls.Result;
+import org.song.sharedmusicplayer.vo.MusicQueueVO;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,17 +15,22 @@ public class PlayQueueController {
     private PlayQueueService queueService;
 
     @GetMapping("/list")
-    public Result<List<PlayQueue>> getQueue() {
+    public Result<List<MusicQueueVO>> getQueue() {
         return Result.success(queueService.getQueue());
     }
 
     @PostMapping("/add")
-    public void addToQueue(@RequestParam Long musicId, @RequestParam Long userId) {
-        queueService.addToQueue(musicId, userId);
+    public Result<Boolean> addToQueue(@RequestParam Long musicId, @RequestParam Long userId) {
+        return Result.success(queueService.addToQueue(musicId, userId));
     }
 
-    @PostMapping("/remove")
-    public void removeFromQueue(@RequestParam Long queueId) {
-        queueService.removeFromQueue(queueId);
+    @DeleteMapping("/remove/{queueId}")
+    public Result<Boolean> removeFromQueue(@PathVariable Long queueId) {
+        return Result.success(queueService.removeFromQueue(queueId));
+    }
+
+    @GetMapping("/current")
+    public Result<MusicQueueVO> getCurrentMusic() {
+        return Result.success(queueService.getQueue().get(0));
     }
 }

@@ -2,12 +2,13 @@ package org.song.sharedmusicplayer.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.song.sharedmusicplayer.entity.PlayQueue;
+import org.song.sharedmusicplayer.vo.MusicQueueVO;
 
 
 import java.util.List;
 
 public interface PlayQueueService extends IService<PlayQueue> {
-    List<PlayQueue> getQueue();
-    void addToQueue(Long musicId, Long userId);
-    void removeFromQueue(Long queueId);
+    List<MusicQueueVO> getQueue();
+    Boolean addToQueue(Long musicId, Long userId);
+    Boolean removeFromQueue(Long queueId);
 }

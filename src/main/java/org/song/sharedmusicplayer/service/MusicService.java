@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface MusicService extends IService<Music> {
     List<Music> getAllMusic();
-    void addMusic(Music music);
+    Boolean addMusic(Music music);
+
+    Boolean deleteMusic(Long id);
 }
