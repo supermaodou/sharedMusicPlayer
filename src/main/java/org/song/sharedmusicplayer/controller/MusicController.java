@@ -1,5 +1,6 @@
 package org.song.sharedmusicplayer.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +34,13 @@ public class MusicController {
     @GetMapping("/list")
     public Result<List<Music>> getAllMusic() {
         return Result.success(musicService.getMusicList());
+    }
+
+    @GetMapping("/page")
+    public Result<Page<Music>> getMusicPage(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return Result.success(musicService.getMusicPage(page, size));
     }
 
     @PostMapping("/add")

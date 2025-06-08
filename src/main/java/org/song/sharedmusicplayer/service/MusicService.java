@@ -1,5 +1,6 @@
 package org.song.sharedmusicplayer.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.song.sharedmusicplayer.entity.Music;
 
@@ -11,4 +12,6 @@ public interface MusicService extends IService<Music> {
     Boolean addMusic(Music music);
 
     Boolean deleteMusic(Long id);
+
+    Page<Music> getMusicPage(int page, int size);
 }

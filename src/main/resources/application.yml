@@ -10,6 +10,9 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: org.song.sharedmusicplayer.entity,org.song.sharedmusicplayer.vo
+  configuration:     ### 开启打印sql配置
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true  # 驼峰命名
 
 # 默认音乐路径
 music:

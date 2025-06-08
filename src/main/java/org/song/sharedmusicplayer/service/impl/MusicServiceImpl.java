@@ -1,5 +1,6 @@
 package org.song.sharedmusicplayer.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,16 @@ public class MusicServiceImpl extends ServiceImpl<MusicMapper, Music> implements
 
     private final WebSocketMessageService messageService;
 
+    private final MusicMapper musicMapper;
+
     @Override
     public List<Music> getMusicList() {
-        return list();
+        return musicMapper.selectList(null);
+    }
+
+    @Override
+    public Page<Music> getMusicPage(int page, int size) {
+        return musicMapper.selectPage(new Page<>(page, size), null);
     }
 
     @Override
