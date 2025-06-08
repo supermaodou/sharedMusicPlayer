@@ -25,7 +25,12 @@ public class PlayQueueServiceImpl extends ServiceImpl<PlayQueueMapper, PlayQueue
 
     @Override
     public List<MusicQueueVO> getQueue() {
-        return playQueueMapper.findCurrentQueue();
+        // 获取当前队列
+        List<MusicQueueVO> queue = playQueueMapper.findCurrentQueue();
+        // 使用LinkedHashSet去重，保持原有顺序
+        return queue.stream()
+                .distinct()
+                .toList();
     }
 
     @Override

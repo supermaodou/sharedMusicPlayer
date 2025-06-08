@@ -10,3 +10,7 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: org.song.sharedmusicplayer.entity,org.song.sharedmusicplayer.vo
+
+# 默认音乐路径
+music:
+  path: D:\Musics\
