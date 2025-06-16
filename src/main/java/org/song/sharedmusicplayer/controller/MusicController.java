@@ -53,6 +53,12 @@ public class MusicController {
         return Result.success(musicService.deleteMusic(id));
     }
 
+    @PostMapping("/scan")
+    public Result<Integer> scanLocalMusic(@RequestParam(required = false) String path) {
+        String scanPath = path != null ? path : musicPath;
+        return Result.success(musicService.scanLocalMusic(scanPath));
+    }
+
     @GetMapping("/local/{fileName:.+}")
     public void getLocalMusic(@PathVariable String fileName,
                               HttpServletRequest request,
@@ -165,23 +171,15 @@ public class MusicController {
     private String getContentType(String fileName) {
         String extension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
 
-        switch (extension) {
-            case "mp3":
-                return "audio/mpeg";
-            case "wav":
-                return "audio/wav";
-            case "flac":
-                return "audio/flac";
-            case "aac":
-                return "audio/aac";
-            case "ogg":
-                return "audio/ogg";
-            case "m4a":
-                return "audio/mp4";
-            case "wma":
-                return "audio/x-ms-wma";
-            default:
-                return "audio/mpeg"; // 默认
-        }
+        return switch (extension) {
+            case "mp3" -> "audio/mpeg";
+            case "wav" -> "audio/wav";
+            case "flac" -> "audio/flac";
+            case "aac" -> "audio/aac";
+            case "ogg" -> "audio/ogg";
+            case "m4a" -> "audio/mp4";
+            case "wma" -> "audio/x-ms-wma";
+            default -> "audio/mpeg"; // 默认
+        };
     }
 }
