@@ -35,11 +35,20 @@ public class PlayQueueServiceImpl extends ServiceImpl<PlayQueueMapper, PlayQueue
 
     @Override
     public Boolean addToQueue(Long musicId, Long userId) {
-        PlayQueue queue = new PlayQueue();
-        queue.setMusicId(musicId);
-        queue.setUserId(userId);
-        queue.setStatus("waiting");
-        boolean save = save(queue);
+        // 先查询是否已经在队列中
+        QueryWrapper<PlayQueue> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("music_id", musicId);
+        queryWrapper.eq("user_id", userId);
+        PlayQueue queue = playQueueMapper.selectOne(queryWrapper);
+        // 如果已经存在，则直接返回
+        if (queue != null) {
+            return true;
+        }
+        PlayQueue playQueue = new PlayQueue();
+        playQueue.setMusicId(musicId);
+        playQueue.setUserId(userId);
+        playQueue.setStatus("waiting");
+        boolean save = save(playQueue);
         if (save) {
             // 通知所有客户端
             messageService.broadcastMessage(WebSocketMessageType.QUEUE_UPDATE, getQueueList());

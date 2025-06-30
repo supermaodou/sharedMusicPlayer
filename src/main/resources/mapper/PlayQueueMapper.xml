@@ -13,7 +13,7 @@
 
     <!-- 查询当前播放队列中的歌曲 -->
     <select id="findCurrentQueue" resultMap="MusicQueueVOResultMap">
-        SELECT q.id, m.id, m.title, m.artist, m.added_by, u.username
+        SELECT q.id, m.id, m.title, m.url, m.cover, m.artist, m.added_by, u.username
         FROM tb_play_queue q
                  INNER JOIN tb_music m ON m.id = q.music_id
                  INNER JOIN tb_users u ON u.id = m.added_by

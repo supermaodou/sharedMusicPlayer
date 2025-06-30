@@ -12,6 +12,8 @@ public class Music {
 
     private String title;
 
+    private String cover;
+
     private String artist;
 
     private String url;
